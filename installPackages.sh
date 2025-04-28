@@ -6,7 +6,7 @@ sudo apt install nala -y
 
 sudo nala upgrade -y
 
-sudo nala install build-essential clang clangd gdb fzf git ripgrep tmux curl ninja-build gettext cmake unzip python3-venv podman stow -y
+sudo nala install build-essential clang clangd gdb fzf git ripgrep tmux curl ninja-build gettext cmake unzip python3-venv podman stow file -y
 
 git config --global user.name "Oséias K. Rocha"
 git config --global user.email "oseiaskr95@gmail.com"
@@ -20,7 +20,7 @@ if [ ! -f "~/.ssh/github_ed25519" ]; then
 	ssh-add ~/.ssh/github_ed25519
 	echo "Add this key to github"
 	cat ~/.ssh/github_ed25519.pub
-	echo -e "Host github.com\n\tIdentityFile ~/.ssh/id_ed25519_github\n\tAddKeysToAgent yes" >> ~/.ssh/config
+	echo -e "Host github.com\n\tIdentityFile ~/.ssh/github_ed25519\n\tAddKeysToAgent yes" >> ~/.ssh/config
 	read -p "Press ENTER after adding the key to github"
 fi
 
@@ -72,4 +72,7 @@ popd
 source ~/.bashrc
 
 # install tmux plugins
-~/.tmux/plugins/tpm/scripts/install_plugins.sh
+~/Repos/dotfiles/.tmux/plugins/tpm/bin/./install_plugins
+
+sed -i '/@catppuccin_window_text/ s/" #T"/" #W"/' ~/Repos/dotfiles/.tmux/plugins/tmux/catppuccin_options_tmux.conf
+sed -i '/@catppuccin_window_current_text / s/" #T"/" #W"/' ~/Repos/dotfiles/.tmux/plugins/tmux/catppuccin_options_tmux.conf
