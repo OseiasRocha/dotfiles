@@ -8,6 +8,9 @@ sudo nala upgrade -y
 
 sudo nala install build-essential clang clangd gdb fzf git ripgrep tmux curl ninja-build gettext cmake unzip python3-venv podman stow file -y
 
+# install starship prompt
+curl -sS https://starship.rs/install.sh | sh
+
 git config --global user.name "Oséias K. Rocha"
 git config --global user.email "oseiaskr95@gmail.com"
 
