@@ -107,5 +107,7 @@ source $ZSH/oh-my-zsh.sh
 # if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
 #   tmux attach || tmux new
 # fi
+. "$HOME/.cargo/env"
+PATH=$PATH:~/go/bin
 
 eval "$(starship init zsh)"
