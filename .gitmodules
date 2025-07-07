@@ -4,6 +4,3 @@
 [submodule ".config/nvim"]
 	path = .config/nvim
 	url = git@github.com:OseiasRocha/kickstart.nvim.git
-[submodule ".oh-my-bash"]
-	path = .oh-my-bash
-	url = https://github.com/ohmybash/oh-my-bash.git
