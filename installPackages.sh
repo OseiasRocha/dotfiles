@@ -54,7 +54,7 @@ GO_URL="https://go.dev/dl/${GO_VERSION}.linux-amd64.tar.gz"
 
 # Download Go tarball
 curl -LO "$GO_URL"
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.24.2.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf ${GO_VERSION}.linux-amd64.tar.gz
 
 popd
 
