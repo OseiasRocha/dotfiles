@@ -33,6 +33,9 @@ shopt -s nocaseglob
 shopt -s nocasematch
 
 . "$HOME/.cargo/env"
-PATH=$PATH:/usr/local/go/bin:"$HOME/idea-IC-251.26094.121/bin":"$HOME/.local/bin"
+PATH=$PATH:"$HOME/.local/opt/go/bin":"$HOME/go/bin":"$HOME/idea-IC-251.26094.121/bin":"$HOME/.local/bin":"$HOME/zig-x86_64-linux-0.14.1"
 
 eval "$(starship init bash)"
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
