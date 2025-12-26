@@ -1,15 +1,23 @@
 #!/usr/bin/env bash
 
-sudo apt update
+. /etc/os-release
 
-sudo apt install nala -y
+if [[ "$ID" == "debian" || "$ID" == "ubuntu" ]]; then
 
-sudo nala upgrade -y
+	sudo apt update
 
-sudo nala install build-essential clang clangd gdb fzf git ripgrep tmux curl ninja-build gettext cmake unzip python3-venv podman stow file -y
+	sudo apt upgrade -y
+
+	sudo apt install build-essential clang clangd gdb fzf git ripgrep tmux curl ninja-build gettext cmake unzip python3-venv podman stow file -y
+elif [[ "$ID" == "fedora" ]]; then
+	echo "test"
+	sudo dnf upgrade -y
+	sudo dnf group install development-tools c-development -y
+	sudo dnf install vim tmux ripgrep clangd clang gdb fzf git curl ninja-build gettext cmake unzip python3-pip stow file awk -y
+fi
 
 # install starship prompt
-curl -sS https://starship.rs/install.sh | sh
+curl -sS https://starship.rs/install.sh | sudo sh
 
 git config --global user.name "Oséias K. Rocha"
 git config --global user.email "oseiaskr95@gmail.com"
