@@ -1,10 +1,5 @@
-*Qt
-*BraveSoftware
-*QtProject.conf
-*QtProject
-*clangd
-*dconf
-*glade.conf
-*go
-*JetBrains*
-.tmux
+*
+!*alacritty
+!*nvim
+!*lazygit
+!*starship.toml
