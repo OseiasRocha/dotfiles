@@ -34,9 +34,13 @@ shopt -s nocasematch
 
 . "$HOME/.cargo/env"
 PATH=$PATH:"$HOME/.local/opt/go/bin":"$HOME/go/bin":"$HOME/idea-IC-251.26094.121/bin":"$HOME/.local/bin":"$HOME/zig-x86_64-linux-0.14.1"
-
-eval "$(starship init bash)"
+alias ls='ls --color=auto'
+alias ll='ls -lh --color=auto'
+alias la='ls -lha --color=auto'
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 export PATH=$PATH:/usr/local/go/bin
+source /home/ozzy/Repos/alacritty/extra/completions/alacritty.bash
+
+eval "$(starship init bash)"
