@@ -143,7 +143,9 @@ done
 
 # configures dotfiles
 pushd ~/Repos/dotfiles
-stow . -t ~/
+for app in apps/*; do
+	echo $(basename $file)
+done
 popd
 
 source ~/.bashrc
