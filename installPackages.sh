@@ -34,8 +34,7 @@ EOF
 	sudo systemctl start docker
 	sudo groupadd docker
 	sudo usermod -aG docker $USER
-	newgrp docker
-	docker run hello-world
+	sudo docker run hello-world
 	read -p "Press ENTER after checking docker installation"
 elif [[ "$ID" == "ubuntu" || "$ID" == "linuxmint" ]]; then
 	updateAndInstallDeb
@@ -60,8 +59,7 @@ EOF
 	sudo systemctl start docker
 	sudo groupadd docker
 	sudo usermod -aG docker $USER
-	newgrp docker
-	docker run hello-world
+	sudo docker run hello-world
 	read -p "Press ENTER after checking docker installation"
 elif [[ "$ID" == "fedora" ]]; then
 	echo "Updating distro"
