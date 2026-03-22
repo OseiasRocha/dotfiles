@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 . /etc/os-release
+DOTFILES_PATH=~/Repos/dotfiles
 
 updateAndInstallDeb () {
 	echo "Updating distro"
@@ -133,25 +134,25 @@ sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf ${GO_VERSION}.linux-amd
 popd
 
 # deletes exisiting files to replace with dotfiles from github
-for file in ~/Repos/dotfiles/.*; do
-    [ -e "$file" ] || continue  # only regular files
-
-    if [ -e "${HOME}/"$(basename "$file")"" ]; then
-        rm -rf "${HOME}/"$(basename "$file")""
-    fi
-done
+#for file in $DOTFILES_PATH/apps/.*; do
+#    [ -e "$file" ] || continue  # only regular files
+#
+#    if [ -e "${HOME}/"$(basename "$file")"" ]; then
+#        rm -rf "${HOME}/"$(basename "$file")""
+#    fi
+#done
 
 # configures dotfiles
-pushd ~/Repos/dotfiles
-for app in apps/*; do
-	echo $(basename $file)
+pushd $DOTFILES_PATH/apps
+for app in *; do
+	stow $app -t ~/
 done
 popd
 
 source ~/.bashrc
 
 # install tmux plugins
-~/Repos/dotfiles/.tmux/plugins/tpm/bin/./install_plugins
+$DOTFILES_PATH/apps/tmux/.tmux/plugins/tpm/bin/./install_plugins
 
-sed -i '/@catppuccin_window_text/ s/" #T"/" #W"/' ~/Repos/dotfiles/.tmux/plugins/tmux/catppuccin_options_tmux.conf
-sed -i '/@catppuccin_window_current_text / s/" #T"/" #W"/' ~/Repos/dotfiles/.tmux/plugins/tmux/catppuccin_options_tmux.conf
+sed -i '/@catppuccin_window_text/ s/" #T"/" #W"/' $DOTFILES_PATH/apps/tmux/.tmux/plugins/tmux/catppuccin_options_tmux.conf
+sed -i '/@catppuccin_window_current_text / s/" #T"/" #W"/' $DOTFILES_PATH/apps/tmux/.tmux/plugins/tmux/catppuccin_options_tmux.conf
