@@ -36,7 +36,7 @@ EOF
 	newgrp docker
 	docker run hello-world
 	read -p "Press ENTER after checking docker installation"
-elif [[ "$ID" == "ubuntu" ]]; then
+elif [[ "$ID" == "ubuntu" || "$ID" == "linuxmint" ]]; then
 	updateAndInstallDeb
 	echo "Installing docker and running hello-world"
 	# Add Docker's official GPG key:
