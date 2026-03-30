@@ -1,2 +1,2 @@
-*plugins
-*nvim
+**/.tmux/plugins
+!**/.tmux/plugins/tpm
