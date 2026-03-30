@@ -130,15 +130,22 @@ curl -LO "$GO_URL"
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf ${GO_VERSION}.linux-amd64.tar.gz
 
 popd
+# renames existing files/folders that stow would conflict with
+BACKUP_SUFFIX=".bak.$(date +%Y%m%d_%H%M%S)"
 
-# deletes exisiting files to replace with dotfiles from github
-#for file in $DOTFILES_PATH/apps/.*; do
-#    [ -e "$file" ] || continue  # only regular files
-#
-#    if [ -e "${HOME}/"$(basename "$file")"" ]; then
-#        rm -rf "${HOME}/"$(basename "$file")""
-#    fi
-#done
+pushd $DOTFILES_PATH/apps
+for app in *; do
+    find "$app" -not -type d | while read -r stow_file; do
+        target_rel="${stow_file#$app/}"
+        target="$HOME/$target_rel"
+
+        if [ -e "$target" ] && [ ! -L "$target" ]; then
+            echo "Backing up $target -> ${target}${BACKUP_SUFFIX}"
+            mv "$target" "${target}${BACKUP_SUFFIX}"
+        fi
+    done
+done
+popd
 
 # configures dotfiles
 pushd $DOTFILES_PATH/apps
