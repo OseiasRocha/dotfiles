@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 . /etc/os-release
-DOTFILES_PATH=~/Repos/dotfiles
+DOTFILES_PATH=~/repos/dotfiles
 
 updateAndInstallDeb () {
 	echo "Updating distro"
@@ -101,11 +101,11 @@ if [ ! -f "~/.ssh/github_ed25519" ]; then
 fi
 
 # clones the repo for the dotfiles in case it wasn't already cloned
-if [ ! -d "~/Repos/dotfiles" ]; then
-	mkdir -p ~/Repos/dotfiles
-	git clone --recurse-submodules git@github.com:OseiasRocha/dotfiles.git ~/Repos/dotfiles
-elif [ ! -d "~/Repos/dotfiles/.git" ]; then
-	echo "Stopping script. Please delete the folder ~/Repos/dotfiles"
+if [ ! -d $DOTFILES_PATH ]; then
+	mkdir -p $DOTFILES_PATH
+   git clone --recurse-submodules git@github.com:OseiasRocha/dotfiles.git $DOTFILES_PATH
+elif [ ! -d $DOTFILES_PATH/.git]; then
+	echo "Stopping script. Please delete the folder" $DOTFILES_PATH
 	exit 1
 fi
 
