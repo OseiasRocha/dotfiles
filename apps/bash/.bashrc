@@ -41,5 +41,6 @@ alias la='ls -lha --color=auto'
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$HOME/.local/bin:$PATH
 
 eval "$(starship init bash)"
