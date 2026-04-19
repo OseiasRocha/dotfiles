@@ -8,7 +8,7 @@ updateAndInstallDeb () {
 	sudo apt update
 	sudo apt upgrade -y
 	echo "Installing tools and dependencies"
-	sudo apt install build-essential clang clangd gdb fzf git ripgrep tmux curl ninja-build gettext cmake unzip python3-venv podman stow file nodejs npm -y
+	sudo apt install build-essential clang clangd gdb fzf git ripgrep tmux curl ninja-build gettext cmake unzip python3-venv podman stow file nodejs npm tree-sitter-cli -y
 }
 
 if [[ "$ID" == "debian" ]]; then
@@ -66,7 +66,7 @@ elif [[ "$ID" == "fedora" ]]; then
 	sudo dnf upgrade -y
 	sudo dnf group install development-tools c-development -y
 	echo "Installing tools and dependencies"
-	sudo dnf install vim tmux ripgrep clangd clang gdb fzf git curl ninja-build gettext cmake unzip python3-pip stow file awk nodejs npm -y
+	sudo dnf install vim tmux ripgrep clangd clang gdb fzf git curl ninja-build gettext cmake unzip python3-pip stow file awk nodejs npm tree-sitter-cli -y
 	echo "Installing docker and running hello-world"
 	sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
 	sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
