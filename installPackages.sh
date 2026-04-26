@@ -2,6 +2,8 @@
 
 . /etc/os-release
 DOTFILES_PATH=~/repos/dotfiles
+if ! [ -e ~/.bash_profile ] ; then
+    echo "source ~/.bashrc" > ~/.bash_profile
 
 updateAndInstallDeb () {
 	echo "Updating distro"
