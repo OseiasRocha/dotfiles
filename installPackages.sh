@@ -4,6 +4,7 @@
 DOTFILES_PATH=~/repos/dotfiles
 if ! [ -e ~/.bash_profile ] ; then
     echo "source ~/.bashrc" > ~/.bash_profile
+fi
 
 updateAndInstallDeb () {
 	echo "Updating distro"
