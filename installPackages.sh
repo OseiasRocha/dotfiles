@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 . /etc/os-release
-DOTFILES_PATH=~/repos/dotfiles
+REPOS_PATH=~/repos
+DOTFILES_PATH=$REPOS_PATH/dotfiles
+
 if ! [ -e ~/.bash_profile ] ; then
     echo "source ~/.bashrc" > ~/.bash_profile
 fi
@@ -11,7 +13,7 @@ updateAndInstallDeb () {
 	sudo apt update
 	sudo apt upgrade -y
 	echo "Installing tools and dependencies"
-	sudo apt install build-essential clang clangd gdb fzf git ripgrep tmux curl ninja-build gettext cmake unzip python3-venv podman stow file nodejs npm tree-sitter-cli -y
+	sudo apt install build-essential clang clangd gdb fzf git ripgrep tmux curl ninja-build gettext cmake unzip python3-venv stow file nodejs npm tree-sitter-cli pkg-config libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev -y
 }
 
 if [[ "$ID" == "debian" ]]; then
@@ -69,7 +71,7 @@ elif [[ "$ID" == "fedora" ]]; then
 	sudo dnf upgrade -y
 	sudo dnf group install development-tools c-development -y
 	echo "Installing tools and dependencies"
-	sudo dnf install vim tmux ripgrep clangd clang gdb fzf git curl ninja-build gettext cmake unzip python3-pip stow file awk nodejs npm tree-sitter-cli -y
+	sudo dnf install vim tmux ripgrep clangd clang gdb fzf git curl ninja-build gettext cmake unzip python3-pip stow file awk nodejs npm tree-sitter-cli freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel g++ -y
 	echo "Installing docker and running hello-world"
 	sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
 	sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -86,9 +88,6 @@ fi
 
 # install starship prompt
 curl -sS https://starship.rs/install.sh | sudo sh
-
-git config --global user.name "Oséias K. Rocha"
-git config --global user.email "oseiaskr95@gmail.com"
 
 # creates a github key in case it doesn't exist yet
 
@@ -121,6 +120,28 @@ sudo install lazygit -D -t /usr/local/bin/
 
 # install rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+pushd $REPOS_PATH
+# build and install apps
+	# alacritty
+	git clone https://github.com/alacritty/alacritty.git
+	pushd alacritty
+	rustup override set stable
+	rustup update stable
+	cargo build --release
+	sudo cp target/release/alacritty /usr/local/bin # or anywhere else in $PATH
+	sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+	sudo desktop-file-install extra/linux/Alacritty.desktop
+	sudo update-desktop-database
+	popd
+	# neovim
+	git clone https://github.com/neovim/neovim
+	pushd neovim
+	git checkout v0.12.2
+	make CMAKE_BUILD_TYPE=RelWithDebInfo
+	sudo make install
+	popd
+popd
 
 # install go
 GO_VERSION=$(curl -s https://go.dev/dl/ | grep -oP 'go[0-9]+\.[0-9]+(\.[0-9]+)?' | head -1)
@@ -164,3 +185,9 @@ $DOTFILES_PATH/apps/tmux/.tmux/plugins/tpm/bin/./install_plugins
 
 sed -i '/@catppuccin_window_text/ s/" #T"/" #W"/' $DOTFILES_PATH/apps/tmux/.tmux/plugins/tmux/catppuccin_options_tmux.conf
 sed -i '/@catppuccin_window_current_text / s/" #T"/" #W"/' $DOTFILES_PATH/apps/tmux/.tmux/plugins/tmux/catppuccin_options_tmux.conf
+
+git config --global user.name "Oséias K. Rocha"
+git config --global user.email "oseiaskr95@gmail.com"
+git config set core.editor nvim
+
+

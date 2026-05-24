@@ -42,5 +42,6 @@ alias la='ls -lha --color=auto'
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$HOME/.local/bin:$PATH
+source /home/ozzy/repos/alacritty/extra/completions/alacritty.bash
 
 eval "$(starship init bash)"
