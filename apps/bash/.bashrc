@@ -43,5 +43,7 @@ alias la='ls -lha --color=auto'
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$HOME/.local/bin:$PATH
 source /home/ozzy/repos/alacritty/extra/completions/alacritty.bash
+. "/home/ozzy/.deno/env"
+source /home/ozzy/.local/share/bash-completion/completions/deno.bash
 
 eval "$(starship init bash)"
