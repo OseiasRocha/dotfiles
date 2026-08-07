@@ -39,6 +39,4 @@ alias la='ls -lha --color=auto'
 . "/home/ozzy/repos/alacritty/extra/completions/alacritty.bash"
 . "/home/ozzy/.local/share/bash-completion/completions/deno.bash"
 
-echo "test"
-
 eval "$(starship init bash)"

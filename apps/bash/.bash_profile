@@ -4,3 +4,7 @@ export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 . "$HOME/.cargo/env"
 . "/home/ozzy/.deno/env"
+
+if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+fi
