@@ -40,3 +40,6 @@ format = "[$virtualenv]($style) "
 style = "bright-black"
 detect_extensions = []
 detect_files = []
+
+[mise]
+disabled = false

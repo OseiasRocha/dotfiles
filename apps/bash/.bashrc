@@ -32,18 +32,11 @@ shopt -s nocaseglob
 # Ignore case in string comparisons
 shopt -s nocasematch
 
-. "$HOME/.cargo/env"
-PATH=$PATH:"$HOME/.local/opt/go/bin":"$HOME/go/bin":"$HOME/idea-IC-251.26094.121/bin":"$HOME/.local/bin":"$HOME/zig-x86_64-linux-0.14.1"
 alias ls='ls --color=auto'
 alias ll='ls -alF --color=auto'
 alias la='ls -lha --color=auto'
 
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$HOME/.local/bin:$PATH
-source /home/ozzy/repos/alacritty/extra/completions/alacritty.bash
-. "/home/ozzy/.deno/env"
-source /home/ozzy/.local/share/bash-completion/completions/deno.bash
+. "/home/ozzy/repos/alacritty/extra/completions/alacritty.bash"
+. "/home/ozzy/.local/share/bash-completion/completions/deno.bash"
 
 eval "$(starship init bash)"
