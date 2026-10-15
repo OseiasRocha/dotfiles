@@ -3,5 +3,5 @@
 Copy the command below to your terminal and run it
 
 ```bash
-bash -c "$(curl -fsSL https://github.com/OseiasRocha/dotfiles/raw/refs/heads/master/installPackages.sh)"
+bash -c "$(curl -fsSL https://github.com/OseiasRocha/dotfiles/raw/refs/heads/WSL/installPackages.sh)"
 ```

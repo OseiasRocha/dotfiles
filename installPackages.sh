@@ -20,7 +20,7 @@ if [[ "$ID" == "debian" ]]; then
 	updateAndInstallDeb
 	echo "Installing docker and running hello-world"
 	# Add Docker's official GPG key:
-	sudo apt install ca-certificates curl
+	sudo apt install ca-certificates curl -y
 	sudo install -m 0755 -d /etc/apt/keyrings
 	sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 	sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -35,7 +35,7 @@ Signed-By: /etc/apt/keyrings/docker.asc
 EOF
 
 	sudo apt update
-	sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 	sudo systemctl start docker
 	sudo groupadd docker
 	sudo usermod -aG docker $USER
@@ -45,7 +45,7 @@ elif [[ "$ID" == "ubuntu" || "$ID" == "linuxmint" ]]; then
 	updateAndInstallDeb
 	echo "Installing docker and running hello-world"
 	# Add Docker's official GPG key:
-	sudo apt install ca-certificates curl
+	sudo apt install ca-certificates curl -y
 	sudo install -m 0755 -d /etc/apt/keyrings
 	sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 	sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -60,7 +60,7 @@ Signed-By: /etc/apt/keyrings/docker.asc
 EOF
 
 	sudo apt update
-	sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 	sudo systemctl start docker
 	sudo groupadd docker
 	sudo usermod -aG docker $USER
@@ -74,7 +74,7 @@ elif [[ "$ID" == "fedora" ]]; then
 	sudo dnf install vim tmux ripgrep clangd clang gdb fzf git curl ninja-build gettext cmake unzip python3-pip stow file awk nodejs npm tree-sitter-cli freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel g++ -y
 	echo "Installing docker and running hello-world"
 	sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
-	sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 	sudo systemctl enable --now docker
 	sudo groupadd docker
 	sudo usermod -aG docker $USER
@@ -105,8 +105,8 @@ fi
 # clones the repo for the dotfiles in case it wasn't already cloned
 if [ ! -d $DOTFILES_PATH ]; then
 	mkdir -p $DOTFILES_PATH
-   git clone --recurse-submodules git@github.com:OseiasRocha/dotfiles.git $DOTFILES_PATH
-elif [ ! -d $DOTFILES_PATH/.git]; then
+        git clone --recurse-submodules git@github.com:OseiasRocha/dotfiles.git $DOTFILES_PATH
+else
 	echo "Stopping script. Please delete the folder" $DOTFILES_PATH
 	exit 1
 fi
@@ -123,17 +123,6 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 pushd $REPOS_PATH
 # build and install apps
-	# alacritty
-	git clone https://github.com/alacritty/alacritty.git
-	pushd alacritty
-	rustup override set stable
-	rustup update stable
-	cargo build --release
-	sudo cp target/release/alacritty /usr/local/bin # or anywhere else in $PATH
-	sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
-	sudo desktop-file-install extra/linux/Alacritty.desktop
-	sudo update-desktop-database
-	popd
 	# neovim
 	git clone https://github.com/neovim/neovim
 	pushd neovim
@@ -158,6 +147,7 @@ popd
 BACKUP_SUFFIX=".bak.$(date +%Y%m%d_%H%M%S)"
 
 pushd $DOTFILES_PATH/apps
+git switch WSL
 for app in *; do
     find "$app" -not -type d | while read -r stow_file; do
         target_rel="${stow_file#$app/}"
@@ -188,6 +178,6 @@ sed -i '/@catppuccin_window_current_text / s/" #T"/" #W"/' $DOTFILES_PATH/apps/t
 
 git config --global user.name "Oséias K. Rocha"
 git config --global user.email "oseiaskr95@gmail.com"
-git config set core.editor nvim
+git config --global set core.editor nvim
 
 

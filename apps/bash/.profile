@@ -1,2 +1,2 @@
 . "$HOME/.cargo/env"
-. "/home/ozzy/.deno/env"
+. "$HOME/.deno/env"

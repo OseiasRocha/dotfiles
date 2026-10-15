@@ -3,7 +3,8 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 . "$HOME/.cargo/env"
-. "/home/ozzy/.deno/env"
+. "$HOME/.deno/env"
+. "$HOME/.local/share/bash-completion/completions/deno.bash"
 
 if [ -f ~/.bashrc ]; then
     . ~/.bashrc

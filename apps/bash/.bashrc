@@ -36,6 +36,5 @@ alias ls='ls --color=auto'
 alias ll='ls -alF --color=auto'
 alias la='ls -lha --color=auto'
 
-. "/home/ozzy/.local/share/bash-completion/completions/deno.bash"
 
 eval "$(starship init bash)"
