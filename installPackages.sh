@@ -4,9 +4,6 @@
 REPOS_PATH=~/repos
 DOTFILES_PATH=$REPOS_PATH/dotfiles
 
-if ! [ -e ~/.bash_profile ] ; then
-    echo "source ~/.bashrc" > ~/.bash_profile
-fi
 
 updateAndInstallDeb () {
 	echo "Updating distro"
@@ -163,6 +160,11 @@ for app in *; do
         target_rel="${stow_file#$app/}"
         target="$HOME/$target_rel"
 
+        # An existing Stow directory symlink may already resolve to this file.
+        # Never move files back into their own source tree.
+        if [ -e "$target" ] && [ "$target" -ef "$stow_file" ]; then
+            continue
+        fi
         if [ -e "$target" ] && [ ! -L "$target" ]; then
             echo "Backing up $target -> ${target}${BACKUP_SUFFIX}"
             mv "$target" "${target}${BACKUP_SUFFIX}"
@@ -178,13 +180,13 @@ for app in *; do
 done
 popd
 
-source ~/.bashrc
+# Initialize TPM even when this repository was cloned without submodules.
+git -C "$DOTFILES_PATH" submodule update --init apps/tmux/.tmux/plugins/tpm
 
 # install tmux plugins
 $DOTFILES_PATH/apps/tmux/.tmux/plugins/tpm/bin/./install_plugins
 
-sed -i '/@catppuccin_window_text/ s/" #T"/" #W"/' $DOTFILES_PATH/apps/tmux/.tmux/plugins/tmux/catppuccin_options_tmux.conf
-sed -i '/@catppuccin_window_current_text / s/" #T"/" #W"/' $DOTFILES_PATH/apps/tmux/.tmux/plugins/tmux/catppuccin_options_tmux.conf
+
 
 git config --global user.name "Oséias K. Rocha"
 git config --global user.email "oseiaskr95@gmail.com"

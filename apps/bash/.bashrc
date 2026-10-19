@@ -1,5 +1,11 @@
 # .bashrc
 
+# Shell customizations below apply only to interactive shells.
+case $- in
+    *i*) ;;
+    *) return ;;
+esac
+
 # Source global definitions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
@@ -36,7 +42,14 @@ alias ls='ls --color=auto'
 alias ll='ls -alF --color=auto'
 alias la='ls -lha --color=auto'
 
-. "/home/ozzy/repos/alacritty/extra/completions/alacritty.bash"
-. "/home/ozzy/.local/share/bash-completion/completions/deno.bash"
+for completion_file in "$HOME/repos/alacritty/extra/completions/alacritty.bash" \
+    "$HOME/.local/share/bash-completion/completions/deno.bash"; do
+    if [ -f "$completion_file" ]; then
+        . "$completion_file"
+    fi
+done
+unset completion_file
 
-eval "$(starship init bash)"
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init bash)"
+fi
