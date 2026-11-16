@@ -121,7 +121,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 pushd $REPOS_PATH
 # build and install apps
 	# alacritty
-	git clone https://github.com/alacritty/alacritty.git
+	git clone get@github.com:alacritty/alacritty.git
 	pushd alacritty
 	rustup override set stable
 	rustup update stable
@@ -132,7 +132,7 @@ pushd $REPOS_PATH
 	sudo update-desktop-database
 	popd
 	# neovim
-	git clone https://github.com/neovim/neovim
+	git clone git@github.com:neovim/neovim.git
 	pushd neovim
 	git checkout stable
 	make CMAKE_BUILD_TYPE=RelWithDebInfo
