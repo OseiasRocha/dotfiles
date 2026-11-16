@@ -51,7 +51,7 @@ done
 unset completion_file
 
 if [[ -f ~/repos/emsdk/emsdk_env.sh ]]; then
-    source ~/repos/emsdk/emsdk_env.sh
+    EMSDK_QUIET=1 source ~/repos/emsdk/emsdk_env.sh
 fi
 
 export NVM_DIR="$HOME/.nvm"
