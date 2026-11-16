@@ -134,7 +134,7 @@ pushd $REPOS_PATH
 	# neovim
 	git clone https://github.com/neovim/neovim
 	pushd neovim
-	git checkout v0.12.2
+	git checkout stable
 	make CMAKE_BUILD_TYPE=RelWithDebInfo
 	sudo make install
 	popd
