@@ -11,3 +11,4 @@ export PATH="$HOME/.local/share/mise/shims:$PATH"
 if [[ $- == *i* ]] && [ -f "$HOME/.bashrc" ]; then
     . "$HOME/.bashrc"
 fi
+. "$HOME/.cargo/env"

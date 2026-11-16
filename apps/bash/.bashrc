@@ -50,6 +50,15 @@ for completion_file in "$HOME/repos/alacritty/extra/completions/alacritty.bash" 
 done
 unset completion_file
 
+if [[ -f ~/repos/emsdk/emsdk_env.sh ]]; then
+    source ~/repos/emsdk/emsdk_env.sh
+fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 if command -v starship >/dev/null 2>&1; then
     eval "$(starship init bash)"
 fi
+

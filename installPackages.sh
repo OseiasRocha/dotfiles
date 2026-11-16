@@ -138,6 +138,16 @@ pushd $REPOS_PATH
 	make CMAKE_BUILD_TYPE=RelWithDebInfo
 	sudo make install
 	popd
+	# emscripten sdk
+	git clone https://github.com/emscripten-core/emsdk.git
+	pushd emsdk
+	./emsdk install latest
+	./emsdk activate latest
+	source ./emsdk_env.sh
+	if [[ "emcc -v" 2> /dev/null ]]; then
+		echo "Emscripten is installed and working"
+	fi
+	popd
 popd
 
 # install go
