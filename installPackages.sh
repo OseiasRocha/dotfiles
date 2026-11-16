@@ -63,6 +63,25 @@ EOF
 	sudo usermod -aG docker $USER
 	sudo docker run hello-world
 	read -p "Press ENTER after checking docker installation"
+elif [[ "$ID" == "almalinux" ]]; then
+	echo "Updating distro"
+	sudo dnf upgrade -y
+	# AlmaLinux uses DNF 4; extra development tools are provided by CRB and EPEL.
+	sudo dnf install dnf-plugins-core -y
+	sudo dnf config-manager --set-enabled crb
+	sudo dnf install epel-release -y
+	sudo dnf group install "Development Tools" -y
+	echo "Installing tools and dependencies"
+	sudo dnf install vim tmux ripgrep clang-tools-extra clang gdb fzf git curl ninja-build gettext cmake unzip python3-pip stow file gawk nodejs npm tree-sitter-cli freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel gcc-c++ pkgconf-pkg-config desktop-file-utils -y
+	echo "Installing docker and running hello-world"
+	sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+	sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+	sudo systemctl enable --now docker
+	getent group docker > /dev/null || sudo groupadd docker
+	sudo usermod -aG docker "$USER"
+	# Use sudo until the next login activates the user's new group membership.
+	sudo docker run hello-world
+	read -p "Press ENTER after checking docker installation"
 elif [[ "$ID" == "fedora" ]]; then
 	echo "Updating distro"
 	sudo dnf upgrade -y
@@ -103,7 +122,7 @@ fi
 if [ ! -d $DOTFILES_PATH ]; then
 	mkdir -p $DOTFILES_PATH
    git clone --recurse-submodules git@github.com:OseiasRocha/dotfiles.git $DOTFILES_PATH
-elif [ ! -d $DOTFILES_PATH/.git]; then
+elif [ ! -d "$DOTFILES_PATH/.git" ]; then
 	echo "Stopping script. Please delete the folder" $DOTFILES_PATH
 	exit 1
 fi
@@ -144,7 +163,7 @@ pushd $REPOS_PATH
 	./emsdk install latest
 	./emsdk activate latest
 	source ./emsdk_env.sh
-	if [[ "emcc -v" 2> /dev/null ]]; then
+	if emcc -v 2> /dev/null; then
 		echo "Emscripten is installed and working"
 	fi
 	popd
