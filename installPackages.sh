@@ -215,10 +215,7 @@ git -C "$DOTFILES_PATH" submodule update --init apps/tmux/.tmux/plugins/tpm
 # install tmux plugins
 $DOTFILES_PATH/apps/tmux/.tmux/plugins/tpm/bin/./install_plugins
 
-
-
 git config --global user.name "Oséias K. Rocha"
 git config --global user.email "oseiaskr95@gmail.com"
-git config set core.editor nvim
-
+git config --global set core.editor nvim
 
