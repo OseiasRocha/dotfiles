@@ -1,0 +1,46 @@
+# Primeppuccin Mocha — matches OseiasRocha/primeppuccin for Neovim.
+# ANSI colors follow lua/catppuccin/groups/terminal.lua in that theme.
+
+[colors.primary]
+background = "#1b1f20" # base
+foreground = "#d5daf0" # text
+
+[colors.cursor]
+text = "#1b1f20"
+cursor = "#d5daf0"
+
+[colors.vi_mode_cursor]
+text = "#1b1f20"
+cursor = "#d5daf0"
+
+[colors.selection]
+text = "#d5daf0"
+background = "#45475a" # surface1 (Neovim Visual)
+
+[colors.search.matches]
+foreground = "#1b1f20"
+background = "#82d2e0" # sky
+
+[colors.search.focused_match]
+foreground = "#151819" # mantle
+background = "#d2788c" # red (Neovim CurSearch)
+
+[colors.normal]
+black = "#6c7086" # overlay0
+red = "#d2788c"
+green = "#8faf77"
+yellow = "#e6d0a1"
+blue = "#7aa0de"
+magenta = "#e0b1d4" # pink
+cyan = "#82d2e0" # sky
+white = "#d5daf0"
+
+[colors.bright]
+black = "#7f849c" # overlay1
+red = "#d2788c"
+green = "#8faf77"
+yellow = "#e6d0a1"
+blue = "#7aa0de"
+magenta = "#e0b1d4"
+cyan = "#82d2e0"
+white = "#d5daf0"

@@ -209,6 +209,10 @@ for app in *; do
 done
 popd
 
+# Alacrtty themes
+mkdir -p ~/.config/alacritty/themes
+git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
+
 # Initialize TPM even when this repository was cloned without submodules.
 git -C "$DOTFILES_PATH" submodule update --init apps/tmux/.tmux/plugins/tpm
 

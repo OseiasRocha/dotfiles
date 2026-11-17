@@ -1,0 +1,6 @@
+[general]
+import = ["~/.config/alacritty/primeppuccin.toml"]
+
+[font]
+normal = { family = "FiraMono Nerd Font", style = "Regular" }
+size = 11
